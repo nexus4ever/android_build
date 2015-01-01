@@ -88,4 +88,23 @@ $(foreach m, $(_check_modules), \
 
 endif
 
+_vendor_module_owner_info_txt := $(call intermediates-dir-for,PACKAGING,vendor_owner_info)/vendor_owner_info.txt
+$(_vendor_module_owner_info_txt): PRIVATE_INFO := $(_vendor_module_owner_info)
+$(_vendor_module_owner_info_txt):
+	@echo "Write vendor module owner info $@"
+	$(hide) mkdir -p $(dir $@) && rm -f $@
+ifdef _vendor_module_owner_info
+	@for w in $(PRIVATE_INFO); \
+	  do \
+	    echo $$w >> $@; \
+	done
+else
+	@echo "No vendor module owner info." > $@
+endif
+
+$(call dist-for-goals, droidcore, $(_vendor_module_owner_info_txt))
+
+_vendor_module_owner_info_txt :=
+_vendor_module_owner_info :=
+_vendor_check_modules :=
 endif
