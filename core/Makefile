@@ -126,7 +126,7 @@ BUILD_KEYS := dev-keys
 endif
 BUILD_VERSION_TAGS += $(BUILD_KEYS)
 BUILD_VERSION_TAGS := $(subst $(space),$(comma),$(sort $(BUILD_VERSION_TAGS)))
-UBER_KEYS := powered-by-uber-toolchains
+UBER_KEYS := uber
 
 # A human-readable string that descibes this build in detail.
 build_desc := $(TARGET_PRODUCT)-$(TARGET_BUILD_VARIANT) $(PLATFORM_VERSION) $(BUILD_ID) $(BUILD_NUMBER_FROM_FILE) $(BUILD_VERSION_TAGS)
