@@ -21,7 +21,8 @@ Invoke ". build/envsetup.sh" from your shell to add the following functions to y
 - sepgrep:   Greps on all local sepolicy files.
 - sgrep:     Greps on all local source files.
 - godir:     Go to the directory containing a file.
-- mka:      Builds using SCHED_BATCH on all processors
+- mka:       Builds using SCHED_BATCH on all processors
+- reposync:  Parallel repo sync using ionice and SCHED_BATCH
 
 Environment options:
 - SANITIZE_HOST: Set to 'true' to use ASAN for all host modules. Note that
@@ -1568,6 +1569,17 @@ function mka() {
     else
         echo "Couldn't locate the top of the tree.  Try setting TOP."
     fi
+}
+
+function reposync() {
+    case `uname -s` in
+        Darwin)
+            repo sync -j 4 "$@"
+            ;;
+        *)
+            schedtool -B -n 1 -e ionice -n 1 `which repo` sync -j 4 "$@"
+            ;;
+    esac
 }
 
 # Force JAVA_HOME to point to java 1.7/1.8 if it isn't already set.
