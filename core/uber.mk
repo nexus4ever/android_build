@@ -95,7 +95,9 @@ LOCAL_DISABLE_STRICT := \
 	clatd \
 	ip \
 	libc_nomalloc \
-	libnvvisualizer
+	linker \
+	libnvvisualizer \
+	libskia
 
 LOCAL_FORCE_DISABLE_STRICT := \
 	libziparchive-host \
