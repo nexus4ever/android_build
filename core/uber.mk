@@ -97,7 +97,8 @@ LOCAL_DISABLE_STRICT := \
 	libc_nomalloc \
 	linker \
 	libnvvisualizer \
-	libskia
+	libskia \
+	libiprouteutil
 
 LOCAL_FORCE_DISABLE_STRICT := \
 	libziparchive-host \
@@ -123,7 +124,8 @@ LOCAL_FORCE_DISABLE_STRICT := \
 	libc_nomalloc \
 	linker \
 	libc_malloc \
-	libnvvisualizer
+	libnvvisualizer \
+	libiprouteutil
 
 DISABLE_STRICT := \
 	-fno-strict-aliasing
