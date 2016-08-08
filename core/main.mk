@@ -186,7 +186,7 @@ javac_version_str := $(shell unset _JAVA_OPTIONS && javac -version 2>&1)
 ifeq ($(LEGACY_USE_JAVA7),) # if LEGACY_USE_JAVA7 == ''
 required_version := "1.8.x"
 required_javac_version := "1.8"
-java_version := $(shell echo '$(java_version_str)' | grep '[ "]1\.8[\. "$$]')
+java_version := $(shell echo '$(java_version_str)' | grep '.*[ "]1\.8[\. "$$]')
 javac_version := $(shell echo '$(javac_version_str)' | grep '[ "]1\.8[\. "$$]')
 else
 required_version := "1.7.x"
@@ -213,10 +213,6 @@ endif
 #
 # For Java 1.7/1.8, we require OpenJDK on linux and Oracle JDK on Mac OS.
 requires_openjdk := false
-ifeq ($(BUILD_OS),linux)
-requires_openjdk := true
-endif
-
 
 # Check for the current jdk
 ifeq ($(requires_openjdk), true)
