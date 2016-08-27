@@ -571,7 +571,7 @@ function breakfast()
     CM_DEVICES_ONLY="true"
     unset LUNCH_MENU_CHOICES
     add_lunch_combo full-eng
-    for f in `/bin/ls vendor/cm/vendorsetup.sh 2> /dev/null`
+    for f in `/bin/ls vendor/nexus/vendorsetup.sh 2> /dev/null`
         do
             echo "including $f"
             . $f
@@ -591,7 +591,7 @@ function breakfast()
             if [ -z "$variant" ]; then
                 variant="userdebug"
             fi
-            lunch cm_$target-$variant
+            lunch nexus_$target-$variant
         fi
     fi
     return $?
