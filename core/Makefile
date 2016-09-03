@@ -1899,7 +1899,7 @@ ifneq ($(TARGET_CUSTOM_RELEASETOOL),)
 	@echo "Running releasetool"
 	$(hide) $(TARGET_CUSTOM_RELEASETOOL)
 else
-	$(hide) ./vendor/cm/tools/squisher
+	$(hide) ./vendor/nexus/tools/squisher
 endif
 
 endif    # build_ota_package
