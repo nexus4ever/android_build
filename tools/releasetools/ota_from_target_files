@@ -589,8 +589,8 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   if HasVendorPartition(input_zip):
     system_progress -= 0.1
 
-  if "selinux_fc" in OPTIONS.info_dict:
-    WritePolicyConfig(OPTIONS.info_dict["selinux_fc"], output_zip)
+#  if "selinux_fc" in OPTIONS.info_dict:
+#    WritePolicyConfig(OPTIONS.info_dict["selinux_fc"], output_zip)
 
   recovery_mount_options = OPTIONS.info_dict.get("recovery_mount_options")
 
@@ -1563,7 +1563,7 @@ def main(argv):
                                  "verify",
                                  "no_fallback_to_full",
                                  "override_device="],
-                             ], extra_option_handler=option_handler)
+                             extra_option_handler=option_handler)
 
   if len(args) != 2:
     common.Usage(__doc__)
