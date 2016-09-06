@@ -599,7 +599,7 @@ function breakfast()
         else
             # This is probably just the nexus model name
             if [ -z "$variant" ]; then
-                variant="userdebug"
+                variant="user"
             fi
             lunch nexus_$target-$variant
         fi
