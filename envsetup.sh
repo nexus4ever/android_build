@@ -131,6 +131,14 @@ function check_product()
         echo "Couldn't locate the top of the tree.  Try setting TOP." >&2
         return
     fi
+
+    if (echo -n $1 | grep -q -e "^nexus_") ; then
+       CUSTOM_BUILD=$(echo -n $1 | sed -e 's/^nexus_//g')
+    else
+       CUSTOM_BUILD=
+    fi
+    export CUSTOM_BUILD
+
         TARGET_PRODUCT=$1 \
         TARGET_BUILD_VARIANT= \
         TARGET_BUILD_TYPE= \
@@ -534,8 +542,10 @@ function print_lunch_menu()
     echo
     if [ "z${CUSTOM_DEVICES_ONLY}" != "z" ]; then
        echo "Breakfast menu... pick a combo:"
+       echo " "
     else
        echo "Lunch menu... pick a combo:"
+       echo " "
     fi
 
     local i=1
@@ -550,6 +560,11 @@ function print_lunch_menu()
        echo "... and don't forget the bacon!"
     fi
 
+    if [ "z${CUSTOM_DEVICES_ONLY}" != "z" ]; then
+       echo " "
+       echo "... time to mka bacon!!"
+    fi
+
     echo
 }
 
@@ -557,7 +572,7 @@ function brunch()
 {
     breakfast $*
     if [ $? -eq 0 ]; then
-        mka bacon
+        time mka bacon
     else
         echo "No such item in brunch menu. Try 'breakfast'"
         return 1
@@ -590,7 +605,7 @@ function breakfast()
         else
             # This is probably just the nexus model name
             if [ -z "$variant" ]; then
-                variant="userdebug"
+                variant="user"
             fi
             lunch nexus_$target-$variant
         fi
@@ -648,6 +663,7 @@ function lunch()
     fi
 
     local product=$(echo -n $selection | sed -e "s/-.*$//")
+    check_product $product
     TARGET_PRODUCT=$product \
     TARGET_BUILD_VARIANT=$variant \
     build_build_var_cache
@@ -1675,6 +1691,11 @@ function mk_timer()
     echo " ####${color_reset}"
     echo
     return $ret
+}
+
+function make()
+{
+    mk_timer $(get_make_command) "$@"
 }
 
 function provision()

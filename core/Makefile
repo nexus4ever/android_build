@@ -1888,12 +1888,9 @@ CUSTOM_TARGET_PACKAGE := $(PRODUCT_OUT)/neXus4ever_$(TARGET_PRODUCT)-$(NEXUS_VER
 .PHONY: otapackage bacon
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 bacon: otapackage
-ifneq ($(TARGET_CUSTOM_RELEASETOOL),)
-	@echo "Running releasetool"
-	$(hide) $(TARGET_CUSTOM_RELEASETOOL)
-else
-#	$(hide) ./vendor/nexus/tools/squisher
-endif
+	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(CUSTOM_TARGET_PACKAGE)
+	$(hide) $(MD5SUM) $(CUSTOM_TARGET_PACKAGE) > $(CUSTOM_TARGET_PACKAGE).md5sum
+	@echo "Package Complete: $(CUSTOM_TARGET_PACKAGE)"
 
 endif    # build_ota_package
 
