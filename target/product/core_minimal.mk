@@ -114,6 +114,21 @@ PRODUCT_PACKAGES += \
     fsck.f2fs \
     make_f2fs \
 
+# Make NTFS
+PRODUCT_PACKAGES += \
+    libntfs-3g \
+    libfuse \
+    mount.ntfs \
+    fsck.ntfs \
+    mkfs.ntfs
+
+# Make exfat
+PRODUCT_PACKAGES += \
+    libexfat \
+    mount.exfat \
+    fsck.exfat \
+    mkfs.exfat
+
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.zygote=zygote32
 PRODUCT_COPY_FILES += \
