@@ -649,6 +649,23 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   if "selinux_fc" in OPTIONS.info_dict:
     WritePolicyConfig(OPTIONS.info_dict["selinux_fc"], output_zip)
 
+    model = GetBuildProp("ro.product.model", OPTIONS.info_dict)
+    build = GetBuildProp("ro.build.date", OPTIONS.info_dict)
+
+    script.Print(" ")
+    script.Print("  _  _    __  __       _ _                  ")
+    script.Print(" | \| |___\ \/ /  _ __| | | _____ _____ _ _ ")
+    script.Print(" | .` / -_)>  < || (_-<_  _/ -_) V / -_) '_|")
+    script.Print(" |_|\_\___/_/\_\_,_/__/ |_|\___|\_/\___|_|  ")
+    script.Print(" ")
+    script.Print(" ")
+script.Print(" Android 7.1.1");
+    script.Print("")
+    script.Print(" Compiled: %s "%(build));
+    script.Print("")
+    script.Print(" Target: %s" % CalculateFingerprint(
+        oem_props, oem_dict, OPTIONS.info_dict))
+
   recovery_mount_options = OPTIONS.info_dict.get("recovery_mount_options")
 
   system_items = ItemSet("system", "META/filesystem_config.txt")
