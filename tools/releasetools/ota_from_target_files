@@ -125,10 +125,6 @@ Usage:  ota_from_target_files [flags] input_target_files output_ota_package
   --payload_signer_args <args>
       Specify the arguments needed for payload signer.
 
-  --backup <boolean>
-      Enable or disable the execution of backuptool.sh.
-      Disabled by default.
-
   --override_device <device>
       Override device-specific asserts. Can be a comma-separated list.
 """
@@ -181,7 +177,6 @@ OPTIONS.gen_verify = False
 OPTIONS.log_diff = None
 OPTIONS.payload_signer = None
 OPTIONS.payload_signer_args = []
-OPTIONS.backuptool = True
 OPTIONS.override_device = 'auto'
 
 def MostPopularKey(d, default):
@@ -642,16 +637,6 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.AppendExtra("ifelse(is_mounted(\"/system\"), unmount(\"/system\"));")
   device_specific.FullOTA_InstallBegin()
 
-  if OPTIONS.backuptool:
-    if block_based:
-      common.ZipWriteStr(output_zip, "system/bin/backuptool.sh",
-                     ""+input_zip.read("SYSTEM/bin/backuptool.sh"))
-      common.ZipWriteStr(output_zip, "system/bin/backuptool.functions",
-                     ""+input_zip.read("SYSTEM/bin/backuptool.functions"))
-    script.Mount("/system")
-    script.RunBackup("backup")
-    script.Unmount("/system")
-
   system_progress = 0.75
 
   if OPTIONS.wipe_user_data:
@@ -739,13 +724,6 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   common.CheckSize(boot_img.data, "boot.img", OPTIONS.info_dict)
   common.ZipWriteStr(output_zip, "boot.img", boot_img.data)
 
-  if OPTIONS.backuptool:
-    script.ShowProgress(0.02, 10)
-    if block_based:
-      script.Mount("/system")
-    script.RunBackup("restore")
-    if block_based:
-      script.Unmount("/system")
 
   script.ShowProgress(0.05, 5)
   script.WriteRawImage("/boot", "boot.img")
@@ -1980,8 +1958,6 @@ def main(argv):
       OPTIONS.updater_binary = a
     elif o in ("--no_fallback_to_full",):
       OPTIONS.fallback_to_full = False
-    elif o in ("--backup"):
-      OPTIONS.backuptool = bool(a.lower() == 'true')
     elif o in ("--override_device"):
       OPTIONS.override_device = a
     elif o == "--stash_threshold":
