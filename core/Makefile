@@ -1978,6 +1978,12 @@ otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 bacon: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(CUSTOM_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(CUSTOM_TARGET_PACKAGE) > $(CUSTOM_TARGET_PACKAGE).md5sum
+	@echo -e ${CL_GRN}"_____   __    ____  __             _____ __                        "${CL_GRN}
+	@echo -e ${CL_GRN}"___  | / /______  |/ /___  __________  // /_______   ______________"${CL_GRN}
+	@echo -e ${CL_GRN}"__   |/ /_  _ \_    /_  / / /_  ___/  // /_  _ \_ | / /  _ \_  ___/"${CL_GRN}
+	@echo -e ${CL_GRN}"_  /|  / /  __/    | / /_/ /_(__  )/__  __/  __/_ |/ //  __/  /    "${CL_GRN}
+	@echo -e ${CL_GRN}"/_/ |_/  \___//_/|_| \__,_/ /____/   /_/  \___/_____/ \___//_/     "${CL_GRN}
+	@echo -e ${CL_GRN}"                                                                   "${CL_GRN}
 	@echo "Package Complete: $(CUSTOM_TARGET_PACKAGE)"
 
 endif    # build_ota_package
