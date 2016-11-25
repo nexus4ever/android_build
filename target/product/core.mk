@@ -25,6 +25,7 @@ PRODUCT_PACKAGES += \
     BlockedNumberProvider \
     BookmarkProvider \
     Browser2 \
+    Camera2 \
     CalendarProvider \
     CaptivePortalLogin \
     CertInstaller \
