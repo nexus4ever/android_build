@@ -99,7 +99,8 @@ LOCAL_DISABLE_STRICT := \
 	libnvvisualizer \
 	libskia \
 	libiprouteutil \
-	libmmcamera_interface
+	libmmcamera_interface \
+	libmmcamera_interface2
 
 LOCAL_FORCE_DISABLE_STRICT := \
 	libziparchive-host \
@@ -127,7 +128,8 @@ LOCAL_FORCE_DISABLE_STRICT := \
 	libc_malloc \
 	libnvvisualizer \
 	libiprouteutil \
-	libmmcamera_interface
+	libmmcamera_interface \
+	libmmcamera_interface2
 
 DISABLE_STRICT := \
 	-fno-strict-aliasing
